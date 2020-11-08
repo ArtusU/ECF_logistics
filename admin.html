@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Area | Customers</title>
+    <title>Admin</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -15,20 +15,11 @@
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Admin</a>
+          <a class="navbar-brand" href="admin.html">Admin</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="pages.html">Pages</a></li>
-            <li><a href="posts.html">Posts</a></li>
-            <li class="active"><a href="users.html">Customers</a></li>
+            <li><a href="add_order.html">Add Order</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Welcome, Admin</a></li>
@@ -42,7 +33,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-10">
-            <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Customers <small> All orders</small></h1>
+            <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Admin <small> All orders</small></h1>
           </div>
           <div class="col-md-2">
             <div class="dropdown create">
@@ -51,11 +42,13 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a type="button" data-toggle="modal" data-target="#addPage">Add Page</a></li>
-                <li><a href="#">Add Post</a></li>
+                <li><a type="button" data-toggle="modal" data-target="add_order.html">Add Order</a></li>
+                <li><a href="add_order.html">Add Order</a></li>
                 <li><a href="#">Add User</a></li>
               </ul>
             </div>
+            <form>
+          </form>
           </div>
         </div>
       </div>
@@ -80,31 +73,32 @@
                 <div class="col-md-2">
                   <div class="well dash-box">
                     <h2><span class="glyphicon" aria-hidden="true"></span> 12</h2>
-                    <h4>Monday</h4>
+                    <h4><a href="delivery_day.html">Monday</a></h4>
+                 
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="well dash-box">
                     <h2><span class="glyphicon" aria-hidden="true"></span> 9</h2>
-                    <h4>Tuesday</h4>
+                    <h4><a href="delivery_day.html">Tuesday</a></h4>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="well dash-box">
                     <h2><span class="glyphicon" aria-hidden="true"></span> 12</h2>
-                    <h4>Wednesday</h4>
+                    <h4><a href="delivery_day.html">Wednesday</a></h4>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="well dash-box">
                     <h2><span class="glyphicon" aria-hidden="true"></span> 16</h2>
-                    <h4>Thursday</h4>
+                    <h4><a href="delivery_day.html">Thursday</a></h4>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="well dash-box">
                     <h2><span class="glyphicon" aria-hidden="true"></span> 12</h2>
-                    <h4>Friday</h4>
+                    <h4><a href="delivery_day.html">Friday</a></h4>
                   </div>
                 </div>
               </div>
@@ -262,18 +256,14 @@
                   </tr>
                 </table>
               </div>
+              <button type="button" class="btn btn-success btn-lg btn-block">Show locations on the map</button>
             </div>
           </div>
-          <div class="col-auto my-1">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-          <form>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
               <label for="exampleFormControlFile1">Example file input</label>
               <input type="file" class="form-control-file" id="exampleFormControlFile1">
             </div>
-          </form
-        </div>
       </div>
     </section>
 
