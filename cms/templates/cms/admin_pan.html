@@ -38,38 +38,38 @@
               <div class="panel-body">
                 <div class="col-md-2">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 6</h2>
+                    <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> {{ new_orders }} </h2>
                     <h4>New</h4>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> 12</h2>
+                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ monday_orders }}</h2>
                     <h4><a href="#">Monday</a></h4>
                  
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> 9</h2>
+                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ tuesday_orders }} </h2>
                     <h4><a href="#">Tuesday</a></h4>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> 12</h2>
+                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ wednesday_orders }} </h2>
                     <h4><a href="#">Wednesday</a></h4>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> 16</h2>
+                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ thursday_orders }} </h2>
                     <h4><a href="#">Thursday</a></h4>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> 12</h2>
+                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ friday_orders }} </h2>
                     <h4><a href="#">Friday</a></h4>
                   </div>
                 </div>
@@ -91,6 +91,7 @@
                   <tr>
                     <th>No</th>
                     <th>Name</th>
+                    <th>Surname</th>
                     <th>Address</th>
                     <th>Postcode</th>
                     <th>Phone</th>
@@ -99,133 +100,42 @@
                     <th>Delivery Day</th>
                     <th>Status</th>
                   </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Sheila Mac</td>
-                    <td>4/6 Ferry Rd.</td>
-                    <td>EH7 6RT</td>
-                    <td>07756383844</td>
-                    <td>Essential Box</td>
-                    <td><a class="btn btn-default" href="edit.html">Edit</a></td>
-                    <td>
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Day...</option>
-                          <option value="1">Monday</option>
-                          <option value="2">Tuesday</option>
-                          <option value="3">Wednesday</option>
-                          <option value="4">Thursday</option>
-                          <option value="5">Friday</option>
-                        </select>
-                      </div
-                    </td>
-                    <td>
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Status</option>
-                          <option value="1">Pending</option>
-                          <option value="2">Delivered</option>
-                        </select>
-                      </div
-                    </td>
-                  <tr>
-                    <td>1</td>
-                    <td>Mickey Boom</td>
-                    <td>4 Moon Cr.</td>
-                    <td>EH3 8RT</td>
-                    <td>07744448844</td>
-                    <td>Essential Box</td>
-                    <td><a class="btn btn-default" href="edit.html">Edit</a></td>
-                    <td>
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Day...</option>
-                          <option value="1">Monday</option>
-                          <option value="2">Tuesday</option>
-                          <option value="3">Wednesday</option>
-                          <option value="4">Thursday</option>
-                          <option value="5">Friday</option>
-                        </select>
-                      </div
-                    </td>
-                    <td>
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Status</option>
-                          <option value="1">Pending</option>
-                          <option value="2">Delivered</option>
-                        </select>
-                      </div
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Jamie Frasier</td>
-                    <td>44/2 Pilton Ave.</td>
-                    <td>EH8 7DT</td>
-                    <td>0772238334</td>
-                    <td>Essential Box</td>
-                    <td><a class="btn btn-default" href="edit.html">Edit</a></td>
-                    <td>
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Day...</option>
-                          <option value="1">Monday</option>
-                          <option value="2">Tuesday</option>
-                          <option value="3">Wednesday</option>
-                          <option value="4">Thursday</option>
-                          <option value="5">Friday</option>
-                        </select>
-                      </div
-                    </td>
-                    <td>
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Status</option>
-                          <option value="1">Pending</option>
-                          <option value="2">Delivered</option>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Cooper Doe</td>
-                    <td>44 Grass Market</td>
-                    <td>EH7 7RF</td>
-                    <td>0700083844</td>
-                    <td>Essential Box</td>
-                    <td><a class="btn btn-default" href="edit.html">Edit</a></td>
-                    <td>
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Day...</option>
-                          <option value="1">Monday</option>
-                          <option value="2">Tuesday</option>
-                          <option value="3">Wednesday</option>
-                          <option value="4">Thursday</option>
-                          <option value="5">Friday</option>
-                        </select>
-                      </div
-                    </td>
-                    <td>
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Status</option>
-                          <option value="1">Pending</option>
-                          <option value="2">Delivered</option>
-                        </select>
-                      </div
-                    </td>
-                  </tr>
+
+                  {% for order in orders %}
+                    <tr>
+                      <td>1</td>
+                      <td>{{ order.recipient.name}}</td>
+                      <td>{{ order.recipient.surname}}</td>
+                      <td>{{ order.delivery_address.address_line}}</td>
+                      <td>{{ order.delivery_address.post_code}}</td>
+                      <td>{{ order.recipient.phone }}</td>
+                      <td>{{ order.product.category }}</td>
+                      <td><a class="btn btn-default" href="edit.html">Edit</a></td>
+                      <td>
+                        <div class="col-auto my-1">
+                          <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
+                          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option selected>Day...</option>
+                            <option value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">Wednesday</option>
+                            <option value="4">Thursday</option>
+                            <option value="5">Friday</option>
+                          </select>
+                        </div
+                      </td>
+                      <td>
+                        <div class="col-auto my-1">
+                          <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
+                          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option selected>Status</option>
+                            <option value="1">Pending</option>
+                            <option value="2">Delivered</option>
+                          </select>
+                        </div
+                      </td>
+                    </tr>
+                  {% endfor %}
                 </table>
               </div>
               <button type="button" class="btn btn-success btn-lg btn-block">Show locations on the map</button>
