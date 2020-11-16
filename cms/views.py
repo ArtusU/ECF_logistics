@@ -6,7 +6,7 @@ from .models import Order, Recipient, Referrer
 
 
 
-def home(request):
+def admin(request):
     orders = Order.objects.all()
 
     new_orders = Order.objects.exclude(delivery_day='*').count()
@@ -29,12 +29,16 @@ def home(request):
     return render(request, 'cms/admin_pan.html', context)
 
 
-def delivery(request):
+def mondayDelivery(request):
+
+
     return render(request, 'cms/delivery_day.html')
 
 
 def run(request):
     return render(request, 'cms/run.html')
+
+
 
 def orderDetails(request, pk):
     order_details = Order.objects.get(id=pk)
@@ -46,11 +50,11 @@ def orderDetails(request, pk):
 
 def referrerDashboard(request, pk):
     referrer = Referrer.objects.get(id=pk)
-    recipients = Recipient.objects.all()
+    orders = referrer.order_set.all()
 
     context = {
         'referrer': referrer,
-        'recipients': recipients
+        'orders': orders,
     }
 
     return render(request, 'cms/referrer_dashboard.html', context)
