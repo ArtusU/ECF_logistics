@@ -11,4 +11,9 @@ urlpatterns = [
     path('run/', views.run, name="run"),
     path('order-details/<str:pk>', views.orderDetails, name="order-details"),
     path('referrer-dashboard/<str:pk>', views.referrerDashboard, name="referrer"),
+
+    path('create-order/', views.createOrder, name="create-order"),
+    path('update-order/<str:pk>', views.updateOrder, name="update-order"),
+    path('delete-order/<str:pk>', views.deleteOrder, name="delete-order"),
+
 ]

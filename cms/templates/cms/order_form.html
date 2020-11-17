@@ -1,0 +1,51 @@
+{% extends "cms/main.html" %}
+
+{% block content %}
+
+
+    <header id="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <h1><span class="glyphicon glyphicon-road" aria-hidden="true"></span> Order Form <small></small></h1>
+          </div>
+          <div class="col-md-2">
+            <div class="dropdown create">
+              <button type="button" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+<section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              <div class="panel-heading main-color-bg">
+                <h3 class="panel-title">Edit Page</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {{field}}
+                            <hr>
+                        {% endfor %}
+                        
+                        <input type="submit" name="Submit">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+{% endblock %}
+

@@ -11,7 +11,8 @@
           </div>
           <div class="col-md-2">
             <div class="dropdown create">
-              <button type="button" class="btn btn-success">Add Order</button>
+              <a type="button" class="btn btn-success" href="{% url 'cms:create-order' %}">Add Order</a>
+              <a class="btn btn-default" href="{% url 'cms:create-order' %}">View</a>
             </div>
           </div>
         </div>
@@ -104,17 +105,19 @@
                       <td>{{ order.product.category }}</td>
                       <td><a class="btn btn-default" href="{% url 'cms:order-details' order.id %}">View</a></td>
                       <td>
-                        <div class="col-auto my-1">
-                          <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                            <option selected>Day...</option>
-                            <option value="1">Monday</option>
-                            <option value="2">Tuesday</option>
-                            <option value="3">Wednesday</option>
-                            <option value="4">Thursday</option>
-                            <option value="5">Friday</option>
-                          </select>
-                        </div
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-succes dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action
+                          </button>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Monday</a>
+                            <a class="dropdown-item" href="#">Tuesday</a>
+                            <a class="dropdown-item" href="#">Wednesday</a>
+                            <a class="dropdown-item" href="#">Thursday</a>
+                            <a class="dropdown-item" href="#">Friday</a>
+                          </div>
+                        </div>
                       </td>
                       <td>
                         <div class="col-auto my-1">

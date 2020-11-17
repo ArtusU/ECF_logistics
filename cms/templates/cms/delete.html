@@ -1,0 +1,50 @@
+{% extends "cms/main.html" %}
+
+{% block content %}
+
+
+    <header id="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <h1><span class="glyphicon glyphicon-road" aria-hidden="true"></span> Order Form <small></small></h1>
+          </div>
+          <div class="col-md-2">
+            <div class="dropdown create">
+              <button type="button" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+<section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              <div class="panel-heading main-color-bg">
+                <h3 class="panel-title">Edit Page</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                    <p>Are you sure you want to delete "{{item}}"?</p>
+
+                    <form action="{% url 'cms:delete-order' item.id  %}" method="POST">
+                        {% csrf_token %}
+
+                        <a class="btn btn-warning" href="{% url 'cms:admin' %}">Cancel</a>
+                        <input class="btn btn-danger" type="submit" name="Confirm">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+{% endblock %}
+

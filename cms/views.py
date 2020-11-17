@@ -1,13 +1,15 @@
 from cms.models import Order
 from django.http import request
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Order, Recipient, Referrer
+from .models import Delivery_Address, Order, Recipient, Referrer
+from .forms import OrderForm
 
 
 
 def admin(request):
-    orders = Order.objects.all()
+    orders = Order.objects.all().order_by('-date_created')
+    
 
     new_orders = Order.objects.exclude(delivery_day='*').count()
     monday_orders = Order.objects.filter(delivery_day='Monday').count()
@@ -30,8 +32,6 @@ def admin(request):
 
 
 def mondayDelivery(request):
-
-
     return render(request, 'cms/delivery_day.html')
 
 
@@ -51,10 +51,52 @@ def orderDetails(request, pk):
 def referrerDashboard(request, pk):
     referrer = Referrer.objects.get(id=pk)
     orders = referrer.order_set.all()
-
     context = {
         'referrer': referrer,
         'orders': orders,
     }
-
     return render(request, 'cms/referrer_dashboard.html', context)
+
+
+def createOrder(request):
+    form = OrderForm()
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'cms/order_form.html', context)
+
+
+def updateOrder(request, pk):
+    order = Order.objects.get(id=pk)
+    form = OrderForm(instance=order)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'cms/order_form.html', context)
+
+
+def deleteOrder(request, pk):
+	order = Order.objects.get(id=pk)
+	if request.method == "POST":
+		order.delete()
+		return redirect('/')
+
+	context = {'item':order}
+	return render(request, 'cms/delete.html', context)
+
+
+
