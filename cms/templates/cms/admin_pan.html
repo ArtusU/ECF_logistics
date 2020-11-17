@@ -11,8 +11,7 @@
           </div>
           <div class="col-md-2">
             <div class="dropdown create">
-              <a type="button" class="btn btn-success" href="{% url 'cms:create-order' %}">Add Order</a>
-              <a class="btn btn-default" href="{% url 'cms:create-order' %}">View</a>
+              <a type="button" class="btn btn-success" href="{% url 'cms:create-order' %}">Create Order</a>
             </div>
           </div>
         </div>
@@ -26,46 +25,12 @@
             <!-- Website Overview -->
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">
-                <h3 class="panel-title">Website Overview</h3>
-              </div>
-              <div class="panel-body">
-                <div class="col-md-2">
-                  <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> {{ new_orders }} </h2>
-                    <h4>New</h4>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ monday_orders }}</h2>
-                    <h4><a href="#">Monday</a></h4>
-                 
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ tuesday_orders }} </h2>
-                    <h4><a href="#">Tuesday</a></h4>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ wednesday_orders }} </h2>
-                    <h4><a href="#">Wednesday</a></h4>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ thursday_orders }} </h2>
-                    <h4><a href="#">Thursday</a></h4>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="well dash-box">
-                    <h2><span class="glyphicon" aria-hidden="true"></span> {{ friday_orders }} </h2>
-                    <h4><a href="#">Friday</a></h4>
-                  </div>
-                </div>
+                <span class="badge badge-primary badge-pill">New {{ new_orders }}</span>
+                <span class="badge badge-primary badge-pill">Monday {{ monday_orders }}</span>
+                <span class="badge badge-primary badge-pill">Tuesday {{ tuesday_orders }}</span>
+                <span class="badge badge-primary badge-pill">Wednesday {{ wednesday_orders }}</span>
+                <span class="badge badge-primary badge-pill">Thursday {{ thursday_orders }}</span>
+                <span class="badge badge-primary badge-pill">Friday {{ friday_orders }}</span>
               </div>
             </div>
 
@@ -76,7 +41,12 @@
               <div class="panel-body">
                 <div class="row">
                       <div class="col-md-12">
-                          <input class="form-control" type="text" placeholder="Filter Users...">
+                        <div class="card card-body">
+                          <form method "GET">
+                            {{ myFilter.form }}
+                            <button class="btn btn-success" type="submit">Search</button>
+                          </form>
+                        </div>
                       </div>
                 </div>
                 <br>
@@ -89,6 +59,7 @@
                     <th>Postcode</th>
                     <th>Phone</th>
                     <th>Type</th>
+                    <th>View</th>
                     <th>Edit</th>
                     <th>Delivery Day</th>
                     <th>Status</th>
@@ -96,7 +67,7 @@
 
                   {% for order in orders %}
                     <tr>
-                      <td>1</td>
+                      <td>{{ order.id}}</td>
                       <td>{{ order.recipient.name}}</td>
                       <td>{{ order.recipient.surname}}</td>
                       <td>{{ order.delivery_address.address_line}}</td>
@@ -104,31 +75,9 @@
                       <td>{{ order.recipient.phone }}</td>
                       <td>{{ order.product.category }}</td>
                       <td><a class="btn btn-default" href="{% url 'cms:order-details' order.id %}">View</a></td>
-                      <td>
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-succes dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action
-                          </button>
-                          <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Monday</a>
-                            <a class="dropdown-item" href="#">Tuesday</a>
-                            <a class="dropdown-item" href="#">Wednesday</a>
-                            <a class="dropdown-item" href="#">Thursday</a>
-                            <a class="dropdown-item" href="#">Friday</a>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="col-auto my-1">
-                          <label class="mr-sm-2" for="inlineFormCustomSelect"></label>
-                          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                            <option selected>Status</option>
-                            <option value="1">Pending</option>
-                            <option value="2">Delivered</option>
-                          </select>
-                        </div
-                      </td>
+                      <td><a class="btn btn-default" href="{% url 'cms:update-order' order.id %}">Edit</a></td>
+                      <td>{{ order.delivery_day }}</td>
+                      <td>{{ order.status }}</td>
                     </tr>
                   {% endfor %}
                 </table>

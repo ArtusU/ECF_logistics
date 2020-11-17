@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Delivery_Address, Order, Recipient, Referrer
 from .forms import OrderForm
+from .filters import OrderFilter
 
 
 
@@ -18,7 +19,10 @@ def admin(request):
     thursday_orders = Order.objects.filter(delivery_day='Thursday').count()
     friday_orders = Order.objects.filter(delivery_day='Friday').count()
 
-    
+    myFilter = OrderFilter(request.GET, queryset=orders)
+    orders = myFilter.qs
+
+
     context = {
         'new_orders': new_orders,
         'orders': orders,
@@ -27,17 +31,9 @@ def admin(request):
         'wednesday_orders': wednesday_orders,
         'thursday_orders': thursday_orders,
         'friday_orders': friday_orders,
+        'myFilter': myFilter,
     }
     return render(request, 'cms/admin_pan.html', context)
-
-
-def mondayDelivery(request):
-    return render(request, 'cms/delivery_day.html')
-
-
-def run(request):
-    return render(request, 'cms/run.html')
-
 
 
 def orderDetails(request, pk):
@@ -65,11 +61,9 @@ def createOrder(request):
         if form.is_valid():
             form.save()
             return redirect('/')
-
     context = {
         'form': form,
     }
-
     return render(request, 'cms/order_form.html', context)
 
 
@@ -81,11 +75,9 @@ def updateOrder(request, pk):
         if form.is_valid():
             form.save()
             return redirect('/')
-
     context = {
         'form': form,
     }
-
     return render(request, 'cms/order_form.html', context)
 
 
@@ -94,7 +86,6 @@ def deleteOrder(request, pk):
 	if request.method == "POST":
 		order.delete()
 		return redirect('/')
-
 	context = {'item':order}
 	return render(request, 'cms/delete.html', context)
 
