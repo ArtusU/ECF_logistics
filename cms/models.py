@@ -75,6 +75,7 @@ class Order(models.Model):
         ('Pending', 'Pending'),
         ('Out for delivery', 'Out for delivery'),
         ('Delivered', 'Delivered'),
+        ('SO', 'Standing Order'),
     )
 
 

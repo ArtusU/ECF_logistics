@@ -1,11 +1,33 @@
-from cms.models import Order
-from django.http import request
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib.auth import authenticate, login, logout
+
+from django.contrib import messages
+
 from .models import Delivery_Address, Order, Recipient, Referrer
-from .forms import OrderForm
+from .forms import OrderForm, CreateUserForm
 from .filters import OrderFilter
 
+
+
+def registerPage(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for '+ user)
+            return redirect("/")
+    
+    context = {'form': form}
+    return render(request, 'cms/register.html', context)
+
+
+def loginPage(request):
+    context = {}
+    return render(request, 'cms/login.html', context)
 
 
 def admin(request):
@@ -20,7 +42,7 @@ def admin(request):
     friday_orders = Order.objects.filter(delivery_day='Friday').count()
 
     myFilter = OrderFilter(request.GET, queryset=orders)
-    orders = myFilter.qs
+    orders = myFilter.qs.order_by('delivery_address__post_code')
 
 
     context = {
