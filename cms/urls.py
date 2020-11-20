@@ -14,8 +14,11 @@ urlpatterns = [
 
     path('order-details/<str:pk>', views.orderDetails, name="order-details"),
 
-    path('referrer/', views.Referrer, name="referrer-page"),
-    path('driver/', views.Driver, name="driver-page"),
+    path('referrer/', views.referrerView, name="referrer-page"),
+    path('referrer-settings/', views.referrerSettings, name="account-settings"),
+
+
+    path('driver/', views.driverView, name="driver-page"),
 
     path('create-order/', views.createOrder, name="create-order"),
     path('update-order/<str:pk>', views.updateOrder, name="update-order"),

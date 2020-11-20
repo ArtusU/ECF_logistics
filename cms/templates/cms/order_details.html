@@ -6,15 +6,13 @@
     <header id="header">
       <div class="container">
         <div class="row">
-          <div class="col-md-7">
+          <div class="col-md-10">
             <h1><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Order Details <small></small></h1>
           </div>
           <!--if user is admin:-->
-          <div class="col-md-5">
+          <div class="col-md-2">
             <div class="dropdown create">
-              <a class="btn btn-default" href="{% url 'cms:home' %}">Back to Admin</a>
-              <a type="button" class="btn btn-success" href="#">Back to Referrer Admin</a>
-              <a type="button" class="btn btn-success" href="{% url 'cms:home' %}">Back to Admin</a>
+              <a type="button" class="btn btn-success" href="{% url 'cms:home' %}">Back >></a>
             </div>
 
           </div>
@@ -43,7 +41,7 @@
                             </ul>
                             <br>
                             <ul>
-                                <li class="list-group-item">Recipient Name: {{ order_details.recipient.name}} {{ order_details.recipient.surname}}</li>
+                                <li class="list-group-item">Recipient Name: {{ order_details.recipient.full_name}} </li>
                                 <li class="list-group-item">Delivery Address: {{ order_details.delivery_address.address_line}}</li>
                                 <li class="list-group-item">Postcode: {{ order_details.delivery_address.post_code}}</li>
                                 <li class="list-group-item">Phone: {{ order_details.recipient.phone }}</li>

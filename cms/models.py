@@ -15,7 +15,7 @@ class Referrer(models.Model):
 
 
     def __str__(self):
-        return self.name + self.surname + self.occupation
+        return self.user.username + self.name + self.occupation
 
 
 class Recipient(models.Model):
@@ -26,7 +26,7 @@ class Recipient(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name + self.surname
+        return self.full_name
 
 
 class Delivery_Address(models.Model):

@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
 from .models import Delivery_Address, Order, Recipient, Referrer
-from .forms import OrderForm, CreateUserForm
+from .forms import OrderForm, CreateUserForm, ReferrerForm
 from .filters import OrderFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
@@ -27,6 +27,7 @@ def registerPage(request):
 
             group = Group.objects.get(name='referrer')
             user.groups.add(group)
+            Referrer.objects.create(user=user)
 
             messages.success(request, 'Account was created for '+ username)
             return redirect("cms:login")
@@ -91,30 +92,42 @@ def home(request):
 
 login_required(login_url='cms:login')
 @allowed_users(allowed_roles=['admin', 'referrer'])
-def Referrer(request):
-    context = {}
+def referrerView(request):
+    orders = request.user.referrer.order_set.all()
+    #referrer = Referrer.objects.get(user=request.user)
+    context = {
+        #'referrer': referrer,
+        'orders': orders
+    }
     return render(request, 'cms/referrer.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['referrer'])
+def referrerSettings(request):
+	referrer = request.user.referrer
+	form = ReferrerForm(instance=referrer)
+
+	if request.method == 'POST':
+		form = ReferrerForm(request.POST, instance=referrer)
+		if form.is_valid():
+			form.save()
+
+	context = {
+        'form':form
+        }
+	return render(request, 'cms/referrer_settings.html', context)
+
 
 
 login_required(login_url='cms:login')
 @allowed_users(allowed_roles=['admin', 'driver'])
-def Driver(request):
+def driverView(request):
+    orders = Order.objects.filter(status='Out for Delivery')
     context = {}
     return render(request, 'cms/driver.html', context)
 
-'''
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['referrer'])
-def referrerDashboard(request):
-    referrer = request.user.get('username')
-	orders = request.user.customer.order_set.all()
 
-    context = {
-        'referrer': referrer,
-        'orders': orders,
-    }
-    return render(request, 'cms/referrer_dashboard.html', context)
-'''
 
 login_required(login_url='cms:login')
 @allowed_users(allowed_roles=['admin', 'referrer', 'driver'])
