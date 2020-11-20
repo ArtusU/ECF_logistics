@@ -34,8 +34,11 @@ def admin_only(view_func):
 		if request.user.groups.exists():
 			group = request.user.groups.all()[0].name
 
-		if group == 'customer':
-			return redirect('user-page')
+		if group == 'referrer':
+			return redirect('cms:referrer-page')
+		
+		if group == 'driver':
+			return redirect('cms:driver-page')
 
 		if group == 'admin':
 			return view_func(request, *args, **kwargs)

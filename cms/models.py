@@ -1,8 +1,10 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.contrib.auth.models import User
 
 
 class Referrer(models.Model):
+    user        = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     name        = models.CharField(max_length=50)
     surname     = models.CharField(max_length=50)
     email       = models.EmailField()
@@ -17,8 +19,7 @@ class Referrer(models.Model):
 
 
 class Recipient(models.Model):
-    name        = models.CharField(max_length=50)
-    surname     = models.CharField(max_length=50)
+    full_name   = models.CharField(max_length=50)
     email       = models.EmailField()
     phone       = models.CharField(max_length=15)
     refereed_by  = models.ForeignKey(Referrer, on_delete=models.CASCADE)

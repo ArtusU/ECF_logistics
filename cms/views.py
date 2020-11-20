@@ -59,7 +59,7 @@ def logoutUser(request):
 
 
 login_required(login_url='cms:login')
-@allowed_users(allowed_roles=['admin'])
+#@allowed_users(allowed_roles=['admin'])
 @admin_only
 def home(request):
     orders = Order.objects.all().order_by('-date_created')
@@ -90,26 +90,17 @@ def home(request):
 
 
 login_required(login_url='cms:login')
-@allowed_users(allowed_roles=['admin', 'referrer', 'driver'])
-def orderDetails(request, pk):
-    order_details = Order.objects.get(id=pk)
-    context = {
-        'order_details': order_details
-    }
-    return render(request, 'cms/order_details.html', context)
-
+@allowed_users(allowed_roles=['admin', 'referrer'])
+def Referrer(request):
+    context = {}
+    return render(request, 'cms/referrer.html', context)
 
 
 login_required(login_url='cms:login')
-@allowed_users(allowed_roles=['admin', 'referrer'])
-def referrerDashboard(request, pk):
-    referrer = Referrer.objects.get(id=pk)
-    orders = referrer.order_set.all()
-    context = {
-        'referrer': referrer,
-        'orders': orders,
-    }
-    return render(request, 'cms/referrer_dashboard.html', context)
+@allowed_users(allowed_roles=['admin', 'driver'])
+def Driver(request):
+    context = {}
+    return render(request, 'cms/driver.html', context)
 
 '''
 @login_required(login_url='login')
@@ -125,7 +116,14 @@ def referrerDashboard(request):
     return render(request, 'cms/referrer_dashboard.html', context)
 '''
 
-
+login_required(login_url='cms:login')
+@allowed_users(allowed_roles=['admin', 'referrer', 'driver'])
+def orderDetails(request, pk):
+    order_details = Order.objects.get(id=pk)
+    context = {
+        'order_details': order_details
+    }
+    return render(request, 'cms/order_details.html', context)
 
 login_required(login_url='cms:login')
 @allowed_users(allowed_roles=['admin', 'referrer'])
