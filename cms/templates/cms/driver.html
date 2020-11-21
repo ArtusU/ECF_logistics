@@ -7,12 +7,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-10">
-            <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Welcome {{ referrer.name}} <small></small></h1>
-          </div>
-          <div class="col-md-2">
-            <div class="dropdown create">
-              <a type="button" class="btn btn-success" href="{% url 'cms:create-order' %}">Add Order</a>
-            </div>
+            <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Welcome {{ request.user}} <small></small></h1>
           </div>
         </div>
       </div>
@@ -33,7 +28,6 @@
                   <table class="table table-striped table-hover">
                   <tr>
                     <th>Name</th>
-                    <th>Surname</th>
                     <th>Adrress</th>
                     <th>Postcode</th>
                     <th>Phone</th>
@@ -43,8 +37,7 @@
 
                   {% for order in orders %}
                     <tr>
-                      <td>{{ order.recipient.name}}</td>
-                      <td>{{ order.recipient.surname}}</td>
+                      <td>{{ order.recipient.full_name}}</td>
                       <td>{{ order.delivery_address.address_line}}</td>
                       <td>{{ order.delivery_address.post_code}}</td>
                       <td>{{ order.recipient.phone }}</td>

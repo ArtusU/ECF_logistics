@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
 
 from .models import Delivery_Address, Order, Recipient, Referrer
 from .forms import OrderForm, CreateUserForm, ReferrerForm
@@ -24,10 +23,6 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-
-            group = Group.objects.get(name='referrer')
-            user.groups.add(group)
-            Referrer.objects.create(user=user)
 
             messages.success(request, 'Account was created for '+ username)
             return redirect("cms:login")
@@ -65,7 +60,7 @@ login_required(login_url='cms:login')
 def home(request):
     orders = Order.objects.all().order_by('-date_created')
     
-    new_orders = Order.objects.exclude(delivery_day='*').count()
+    new_orders = Order.objects.all().count()
     monday_orders = Order.objects.filter(delivery_day='Monday').count()
     tuesday_orders = Order.objects.filter(delivery_day='Tuesday').count()
     wednesday_orders = Order.objects.filter(delivery_day='Wednesday').count()
@@ -73,7 +68,7 @@ def home(request):
     friday_orders = Order.objects.filter(delivery_day='Friday').count()
 
     myFilter = OrderFilter(request.GET, queryset=orders)
-    orders = myFilter.qs.order_by('delivery_address__post_code')
+    orders = myFilter.qs.order_by('-delivery_address__post_code')
 
 
     context = {
@@ -123,8 +118,10 @@ def referrerSettings(request):
 login_required(login_url='cms:login')
 @allowed_users(allowed_roles=['admin', 'driver'])
 def driverView(request):
-    orders = Order.objects.filter(status='Out for Delivery')
-    context = {}
+    #orders = Order.objects.filter(status='Out for Delivery')
+    orders = Order.objects.all().order_by('delivery_address__post_code')
+    
+    context = {'orders': orders}
     return render(request, 'cms/driver.html', context)
 
 
