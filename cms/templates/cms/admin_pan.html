@@ -69,7 +69,7 @@
                       <td>{{ order.delivery_address.address_line}}</td>
                       <td>{{ order.delivery_address.post_code}}</td>
                       <td>{{ order.recipient.phone }}</td>
-                      <td>{{ order.product.category }}</td>
+                      <td>{{ order.product}}</td>
                       <td><a class="btn btn-default" href="{% url 'cms:order-details' order.id %}">View</a></td>
                       <td><a class="btn btn-default" href="{% url 'cms:update-order' order.id %}">Edit</a></td>
                       <td>{{ order.delivery_day }}</td>

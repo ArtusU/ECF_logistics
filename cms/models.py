@@ -39,7 +39,7 @@ class Delivery_Address(models.Model):
         return self.address_line
 
 
-class ProductCategory(models.Model):
+class Product_Tag(models.Model):
     name = models.CharField(max_length=20)
     
     def __str__(self):
@@ -58,7 +58,7 @@ class Product(models.Model):
     name                = models.CharField(max_length=50)
     price               = models.FloatField()
     category            = models.CharField(max_length=50, choices=CATEGORY)
-    product_category    = models.ManyToManyField(ProductCategory)
+    product_tag         = models.ManyToManyField(Product_Tag)
     description         = models.CharField(max_length=200, blank=True)
     day_created         = models.DateTimeField(auto_now_add=True)
     active              = models.BooleanField(default=False)

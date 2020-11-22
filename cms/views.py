@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import Delivery_Address, Order, Recipient, Referrer
-from .forms import OrderForm, CreateUserForm, ReferrerForm, RecipientForm, AddressForm
+from .forms import OrderForm, CreateUserForm, ReferrerForm, RecipientForm, AddressForm, StatusOrderForm
 from .filters import OrderFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
@@ -152,7 +152,6 @@ def createOrder(request):
 
         if recipient_form.is_valid() and address_form.is_valid() and ord_form.is_valid():
             
-            #Recipient.objects.create(**recipient_form.cleaned_data)
             obj_recipient = recipient_form.save(commit=False)
             obj_recipient.refereed_by = request.user.referrer
             obj_recipient.save()
@@ -161,7 +160,6 @@ def createOrder(request):
             obj_address.recipient = obj_recipient
             obj_address.save()
             
-
             obj_order = ord_form.save(commit=False)
             obj_order.referrer = request.user.referrer
             obj_order.recipient = obj_recipient
@@ -174,8 +172,7 @@ def createOrder(request):
     context = {
         'recipient_form': recipient_form,
         'address_form': address_form,
-        'ord_form': ord_form,
-        
+        'ord_form': ord_form,   
     }
     return render(request, 'cms/order_form.html', context)
 
@@ -184,14 +181,29 @@ login_required(login_url='cms:login')
 @allowed_users(allowed_roles=['admin', 'referrer', 'driver'])
 def updateOrder(request, pk):
     order = Order.objects.get(id=pk)
-    form = OrderForm(instance=order)
+    ord_form = StatusOrderForm(instance=order)
+    recipient_form = RecipientForm(instance=order.recipient)
+    address_form = AddressForm(instance=order.delivery_address)
+
+
+
     if request.method == 'POST':
-        form = OrderForm(request.POST, instance=order)
-        if form.is_valid():
-            form.save()
+        #form = OrderForm(request.POST, instance=order)
+        ord_form = StatusOrderForm(request.POST, instance=order)
+        recipient_form = RecipientForm(request.POST, instance=order.recipient)
+        address_form = AddressForm(request.POST, instance=order.delivery_address)
+        
+        if recipient_form.is_valid() and address_form.is_valid() and ord_form.is_valid():
+            recipient_form.save()
+            address_form.save()
+            ord_form.save()
+
             return redirect('/')
+
     context = {
-        'form': form,
+        'recipient_form': recipient_form,
+        'address_form': address_form,
+        'ord_form': ord_form,   
     }
     return render(request, 'cms/order_form.html', context)
 

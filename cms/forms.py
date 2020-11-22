@@ -37,5 +37,7 @@ class CreateUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
-class ReferralForm(forms.Form):
-    pass
+class StatusOrderForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = ['product', 'comments', 'status', 'delivery_day', 'run']
