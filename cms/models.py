@@ -20,7 +20,7 @@ class Referrer(models.Model):
 
 class Recipient(models.Model):
     full_name   = models.CharField(max_length=50)
-    email       = models.EmailField()
+    email       = models.EmailField(blank=True)
     phone       = models.CharField(max_length=15)
     refereed_by  = models.ForeignKey(Referrer, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -102,7 +102,7 @@ class Order(models.Model):
     recipient           = models.ForeignKey(Recipient, null=True, on_delete=models.SET_NULL)   
     product             = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     delivery_address    = models.ForeignKey(Delivery_Address, related_name='delivery_address', null=True, on_delete=models.SET_NULL)
-    comments            = models.CharField(max_length=200, blank=True)
+    comments            = models.TextField(max_length=200, blank=True)
     date_created        = models.DateTimeField(auto_now_add=True)
     status              = models.CharField(max_length=100, blank=True, choices=STATUS)
     delivery_day        = models.CharField(max_length=100, blank=True, choices=DELIVERY_DAY)

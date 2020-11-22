@@ -10,5 +10,11 @@ class OrderFilter(django_filters.FilterSet):
 
 	class Meta:
 		model = Order
-		fields = ['referrer__surname', 'referrer__institution', 'recipient__full_name', 'product', 'delivery_day', 'run', 'status']
+		fields = ['referrer__surname', 'referrer__institution', 'recipient__full_name', 'product', 'status', 'delivery_day', 'run' ]
+		
+
+class DriverOrderFilter(django_filters.FilterSet):
+	class Meta:
+		model = Order
+		fields = ['delivery_day', 'run']
 		

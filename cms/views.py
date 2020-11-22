@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Delivery_Address, Order, Recipient, Referrer
 from .forms import OrderForm, CreateUserForm, ReferrerForm, RecipientForm, AddressForm, StatusOrderForm
-from .filters import OrderFilter
+from .filters import OrderFilter, DriverOrderFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
 
@@ -89,7 +89,7 @@ def home(request):
 login_required(login_url='cms:login')
 @allowed_users(allowed_roles=['admin', 'referrer'])
 def referrerView(request):
-    orders = request.user.referrer.order_set.all()
+    orders = request.user.referrer.order_set.all().order_by('-date_created')
     #referrer = Referrer.objects.get(user=request.user)
     context = {
         #'referrer': referrer,
@@ -108,6 +108,7 @@ def referrerSettings(request):
 		form = ReferrerForm(request.POST, instance=referrer)
 		if form.is_valid():
 			form.save()
+            
 
 	context = {
         'form':form
@@ -119,10 +120,16 @@ def referrerSettings(request):
 login_required(login_url='cms:login')
 @allowed_users(allowed_roles=['admin', 'driver'])
 def driverView(request):
+    orders = Order.objects.filter(status='Out for delivery')
     #orders = Order.objects.filter(status='Out for Delivery')
-    orders = Order.objects.all().order_by('delivery_address__post_code')
+
+    DriverFilter = DriverOrderFilter(request.GET, queryset=orders)
+    orders = DriverFilter.qs.order_by('delivery_address__post_code')
     
-    context = {'orders': orders}
+    context = {
+        'orders': orders,
+        'DriverFilter': DriverFilter
+        }
     return render(request, 'cms/driver.html', context)
 
 
@@ -184,8 +191,6 @@ def updateOrder(request, pk):
     ord_form = StatusOrderForm(instance=order)
     recipient_form = RecipientForm(instance=order.recipient)
     address_form = AddressForm(instance=order.delivery_address)
-
-
 
     if request.method == 'POST':
         #form = OrderForm(request.POST, instance=order)

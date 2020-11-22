@@ -1,17 +1,17 @@
 {% extends "cms/main.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 
     <header id="header">
       <div class="container">
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-4">
             <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Edit your details <small></small></h1>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-8">
             <div class="dropdown create">
-              <a type="button" class="btn btn-success" href="{% url 'cms:referrer-page' %}">Back to profile</a>
+              <a type="button" class="btn btn-success" href="{% url 'cms:referrer-page' %}">Back to your Dashboard</a>
             </div>
           </div>
         </div>
@@ -21,17 +21,17 @@
     <section id="main">
       <div class="container">
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-6">
             <div class="list-group">
               <a class="list-group-item active main-color-bg">
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Referrer Dashboard
               </a>
-                <form method="POST" action="" enctype="multipart/form-data">
-				{% csrf_token %}
-				{{form.as_p}}
-		
-			    <input class="btn btn-success" type="submit" name="Update Information">
-			    </form>
+              <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+      
+              <input class="btn btn-success" type="submit" name="Update Information">
+              </form>
             </div>
           </div>
         </div>

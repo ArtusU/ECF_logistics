@@ -58,9 +58,10 @@
                     <th>Phone</th>
                     <th>Type</th>
                     <th>View</th>
-                    <th>Edit</th>
-                    <th>Delivery Day</th>
+                    <th>Stage</th>
                     <th>Status</th>
+                    <th>Delivery Day</th>
+                    <th>Run</th>
                   </tr>
 
                   {% for order in orders %}
@@ -71,9 +72,10 @@
                       <td>{{ order.recipient.phone }}</td>
                       <td>{{ order.product}}</td>
                       <td><a class="btn btn-default" href="{% url 'cms:order-details' order.id %}">View</a></td>
-                      <td><a class="btn btn-default" href="{% url 'cms:update-order' order.id %}">Edit</a></td>
-                      <td>{{ order.delivery_day }}</td>
+                      <td><a class="btn btn-default" href="{% url 'cms:update-order' order.id %}">Stage</a></td>
                       <td>{{ order.status }}</td>
+                      <td>{{ order.delivery_day }}</td>
+                      <td>{{ order.run }}</td>
                     </tr>
                   {% endfor %}
                 </table>

@@ -28,8 +28,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading main-color-bg">
                             <h3 class="panel-title">Order</h3>
+                            
                             <a class="btn btn-success" href={% url 'cms:update-order' order_details.id %}>Update</a>
                             <a class="btn btn-danger" href={% url 'cms:delete-order' order_details.id %}>Delete</a>
+                           
                         </div>
                         <div class="panel-body">
                             <br>
@@ -45,6 +47,7 @@
                                 <li class="list-group-item">Delivery Address: {{ order_details.delivery_address.address_line}}</li>
                                 <li class="list-group-item">Postcode: {{ order_details.delivery_address.post_code}}</li>
                                 <li class="list-group-item">Phone: {{ order_details.recipient.phone }}</li>
+                                <li class="list-group-item">Email: {{ order_details.recipient.email }}</li>
                                 <li class="list-group-item">Directions: {{ order_details.delivery_address.directions }}</li>
                             </ul>
                             <br>
