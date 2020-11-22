@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import Delivery_Address, Order, Recipient, Referrer
-from .forms import OrderForm, CreateUserForm, ReferrerForm
+from .forms import OrderForm, CreateUserForm, ReferrerForm, RecipientForm, AddressForm
 from .filters import OrderFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
@@ -58,7 +58,7 @@ login_required(login_url='cms:login')
 #@allowed_users(allowed_roles=['admin'])
 @admin_only
 def home(request):
-    orders = Order.objects.all().order_by('-date_created')
+    orders = Order.objects.all()
     
     new_orders = Order.objects.all().count()
     monday_orders = Order.objects.filter(delivery_day='Monday').count()
@@ -68,7 +68,8 @@ def home(request):
     friday_orders = Order.objects.filter(delivery_day='Friday').count()
 
     myFilter = OrderFilter(request.GET, queryset=orders)
-    orders = myFilter.qs.order_by('-delivery_address__post_code')
+    orders = myFilter.qs.order_by('-date_created')
+    #orders = myFilter.qs.order_by('delivery_address__post_code')
 
 
     context = {
@@ -135,17 +136,46 @@ def orderDetails(request, pk):
     }
     return render(request, 'cms/order_details.html', context)
 
+
+
 login_required(login_url='cms:login')
 @allowed_users(allowed_roles=['admin', 'referrer'])
 def createOrder(request):
-    form = OrderForm()
+    ord_form = OrderForm()
+    recipient_form = RecipientForm()
+    address_form = AddressForm()
+
     if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
+        recipient_form = RecipientForm(request.POST)
+        address_form = AddressForm(request.POST)
+        ord_form = OrderForm(request.POST)
+
+        if recipient_form.is_valid() and address_form.is_valid() and ord_form.is_valid():
+            
+            #Recipient.objects.create(**recipient_form.cleaned_data)
+            obj_recipient = recipient_form.save(commit=False)
+            obj_recipient.refereed_by = request.user.referrer
+            obj_recipient.save()
+
+            obj_address = address_form.save(commit=False)
+            obj_address.recipient = obj_recipient
+            obj_address.save()
+            
+
+            obj_order = ord_form.save(commit=False)
+            obj_order.referrer = request.user.referrer
+            obj_order.recipient = obj_recipient
+            obj_order.delivery_address = obj_address
+            obj_order.save()
+            
             return redirect('/')
+
+
     context = {
-        'form': form,
+        'recipient_form': recipient_form,
+        'address_form': address_form,
+        'ord_form': ord_form,
+        
     }
     return render(request, 'cms/order_form.html', context)
 

@@ -45,7 +45,7 @@
                                 <li class="list-group-item">Delivery Address: {{ order_details.delivery_address.address_line}}</li>
                                 <li class="list-group-item">Postcode: {{ order_details.delivery_address.post_code}}</li>
                                 <li class="list-group-item">Phone: {{ order_details.recipient.phone }}</li>
-                                <li class="list-group-item">Comments: {{ order_details.delivery_address.comments }}</li>
+                                <li class="list-group-item">Directions: {{ order_details.delivery_address.directions }}</li>
                             </ul>
                             <br>
                             <ul>
@@ -53,13 +53,14 @@
                                 <li class="list-group-item">Date Created: {{ order_details.date_created }}</li>
                                 <li class="list-group-item">Category: {{ order_details.product.category }}</li>
                                 <li class="list-group-item">Price: {{ order_details.product.price }}</li>
-                                <li class="list-group-item">Description: {{ order_details.product.description }}</li>
+                                <li class="list-group-item">Product Description: {{ order_details.product.description }}</li>
                             </ul>
                             <br>
                             <ul>
                                 <li class="list-group-item">Delivery Day: {{ order_details.delivery_day }}</li>
                                 <li class="list-group-item">Run no: {{ order_details.run }}</li>
                                 <li class="list-group-item">Order Status: {{ order_details.status }}</li>
+                                <li class="list-group-item">Order Comments: {{ order_details.comments }}</li>
                             </ul>
                         </div>
                         <button type="button" class="btn btn-success btn-lg btn-block">Show locations on the map</button>

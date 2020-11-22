@@ -29,7 +29,11 @@ INSTALLED_APPS = [
 
     'cms.apps.CmsConfig',
     'django_filters',
+    
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -95,7 +99,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+DATETIME_FORMAT = '%Y-%m-%D %H:%M:%S'
+
+LANGUAGE_CODE ='en-GB'
 
 TIME_ZONE = 'UTC'
 

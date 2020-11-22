@@ -33,7 +33,7 @@ class Delivery_Address(models.Model):
     recipient           = models.ForeignKey(Recipient, on_delete=models.CASCADE)
     address_line        = models.CharField(max_length=50)
     post_code           = models.CharField(max_length=10)
-    comments            = models.CharField(max_length=200, blank=True)
+    directions          = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.address_line
@@ -109,7 +109,7 @@ class Order(models.Model):
     run                 = models.CharField(max_length=100, blank=True, choices=RUN)
 
     def __str__(self):
-        return self.product.name
+        return self.product.name + self.recipient.full_name
 
 
 
