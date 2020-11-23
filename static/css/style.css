@@ -1,5 +1,5 @@
 body{
-  background:#edf0eb;
+  background:#789267;
 }
 
 /* Navbar */
@@ -20,7 +20,7 @@ body{
   border-color: #157e07;
 }
 .navbar-default .navbar-brand {
-  color: #ecf1f0;
+  color: #c9e9e2;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
@@ -39,7 +39,7 @@ body{
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #c1ffbb;
+  color: #b8e4b4;
   background-color: #0b720b;
 }
 .navbar-default .navbar-nav > .open > a,
@@ -73,13 +73,13 @@ body{
 .main-color-bg{
   background-color: #086108 !important;
   border-color: #23880a !important;
-  color:#ffffff !important;
+  color:#e4adad !important;
 }
 
 /* Header */
 #header{
   background:#333333;
-  color:#ffffff;
+  color:#93b68f;
   padding-bottom: 10px;
   margin-bottom: 15px;
 }
@@ -90,7 +90,7 @@ body{
 
 /* Breadcrumb */
 .breadcrumb{
-  background:#cccccc;
+  background:#a37b7b;
   color:#333333;
 }
 
@@ -115,7 +115,7 @@ body{
 /* Footer */
 #footer{
   background:#333333;
-  color:#ffffff;
+  color:#d49696;
   text-align:center;
   padding:30px;
   margin-top:30px;
